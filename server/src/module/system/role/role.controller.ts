@@ -1,12 +1,20 @@
-import { Controller, Get, Post, Body, Put, Param, Query, Delete, Res } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBody, ApiConsumes, ApiQuery, ApiBearerAuth } from '@nestjs/swagger';
-import { RoleService } from './role.service';
-import { Response } from 'express';
-import { CreateRoleDto, UpdateRoleDto, ListRoleDto, ChangeStatusDto, AuthUserCancelDto, AuthUserCancelAllDto, AuthUserSelectAllDto } from './dto/index';
-import { AllocatedListDto } from '../user/dto/index';
-import { RequirePermission } from 'src/common/decorators/require-premission.decorator';
+import { Controller, Get, Post, Body, Put, Param, Query, Delete, Res } from '@nestjs/common'
+import { ApiTags, ApiOperation, ApiBody, ApiConsumes, ApiQuery, ApiBearerAuth } from '@nestjs/swagger'
+import { RoleService } from './role.service'
+import { Response } from 'express'
+import {
+  CreateRoleDto,
+  UpdateRoleDto,
+  ListRoleDto,
+  ChangeStatusDto,
+  AuthUserCancelDto,
+  AuthUserCancelAllDto,
+  AuthUserSelectAllDto,
+} from './dto/index'
+import { AllocatedListDto } from '../user/dto/index'
+import { RequirePermission } from 'src/common/decorators/require-premission.decorator'
 
-import { UserService } from '../user/user.service';
+import { UserService } from '../user/user.service'
 @ApiTags('角色管理')
 @Controller('system/role')
 export class RoleController {
@@ -25,7 +33,7 @@ export class RoleController {
   @RequirePermission('system:role:add')
   @Post()
   create(@Body() createRoleDto: CreateRoleDto) {
-    return this.roleService.create(createRoleDto);
+    return this.roleService.create(createRoleDto)
   }
 
   @ApiOperation({
@@ -38,7 +46,7 @@ export class RoleController {
   @RequirePermission('system:role:list')
   @Get('list')
   findAll(@Query() query: ListRoleDto) {
-    return this.roleService.findAll(query);
+    return this.roleService.findAll(query)
   }
 
   @ApiOperation({
@@ -47,7 +55,7 @@ export class RoleController {
   @RequirePermission('system:role:edit')
   @Get('deptTree/:id')
   deptTree(@Param('id') id: string) {
-    return this.roleService.deptTree(+id);
+    return this.roleService.deptTree(+id)
   }
 
   @ApiOperation({
@@ -56,7 +64,7 @@ export class RoleController {
   @RequirePermission('system:role:query')
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.roleService.findOne(+id);
+    return this.roleService.findOne(+id)
   }
 
   @ApiOperation({
@@ -69,7 +77,7 @@ export class RoleController {
   @RequirePermission('system:role:edit')
   @Put()
   update(@Body() updateRoleDto: UpdateRoleDto) {
-    return this.roleService.update(updateRoleDto);
+    return this.roleService.update(updateRoleDto)
   }
 
   @ApiOperation({
@@ -82,7 +90,7 @@ export class RoleController {
   @RequirePermission('system:role:edit')
   @Put('dataScope')
   dataScope(@Body() updateRoleDto: UpdateRoleDto) {
-    return this.roleService.dataScope(updateRoleDto);
+    return this.roleService.dataScope(updateRoleDto)
   }
 
   @ApiOperation({
@@ -95,14 +103,14 @@ export class RoleController {
   @RequirePermission('system:role:edit')
   @Put('changeStatus')
   changeStatus(@Body() changeStatusDto: ChangeStatusDto) {
-    return this.roleService.changeStatus(changeStatusDto);
+    return this.roleService.changeStatus(changeStatusDto)
   }
 
   @RequirePermission('system:role:remove')
   @Delete(':id')
   remove(@Param('id') ids: string) {
-    const menuIds = ids.split(',').map((id) => +id);
-    return this.roleService.remove(menuIds);
+    const menuIds = ids.split(',').map((id) => +id)
+    return this.roleService.remove(menuIds)
   }
 
   @ApiOperation({
@@ -115,7 +123,7 @@ export class RoleController {
   @RequirePermission('system:role:query')
   @Get('authUser/allocatedList')
   authUserAllocatedList(@Query() query: AllocatedListDto) {
-    return this.userService.allocatedList(query);
+    return this.userService.allocatedList(query)
   }
 
   @ApiOperation({
@@ -128,7 +136,7 @@ export class RoleController {
   @RequirePermission('system:role:query')
   @Get('authUser/unallocatedList')
   authUserUnAllocatedList(@Query() query: AllocatedListDto) {
-    return this.userService.unallocatedList(query);
+    return this.userService.unallocatedList(query)
   }
 
   @ApiOperation({
@@ -141,7 +149,7 @@ export class RoleController {
   @RequirePermission('system:role:edit')
   @Put('authUser/cancel')
   authUserCancel(@Body() body: AuthUserCancelDto) {
-    return this.userService.authUserCancel(body);
+    return this.userService.authUserCancel(body)
   }
 
   @ApiOperation({
@@ -154,7 +162,7 @@ export class RoleController {
   @RequirePermission('system:role:edit')
   @Put('authUser/cancelAll')
   authUserCancelAll(@Body() body: AuthUserCancelAllDto) {
-    return this.userService.authUserCancelAll(body);
+    return this.userService.authUserCancelAll(body)
   }
 
   @ApiOperation({
@@ -167,13 +175,13 @@ export class RoleController {
   @RequirePermission('system:role:edit')
   @Put('authUser/selectAll')
   authUserSelectAll(@Body() body: AuthUserSelectAllDto) {
-    return this.userService.authUserSelectAll(body);
+    return this.userService.authUserSelectAll(body)
   }
 
   @ApiOperation({ summary: '导出角色管理xlsx文件' })
   @RequirePermission('system:role:export')
   @Post('/export')
   async export(@Res() res: Response, @Body() body: ListRoleDto): Promise<void> {
-    return this.roleService.export(res, body);
+    return this.roleService.export(res, body)
   }
 }

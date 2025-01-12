@@ -1,6 +1,18 @@
-import { IsString, IsJSON, IsEnum, IsPhoneNumber, IsArray, Min, Length, IsOptional, IsBoolean, IsNumber, IsNumberString } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
-import { PagingDto } from 'src/common/dto/index';
+import {
+  IsString,
+  IsJSON,
+  IsEnum,
+  IsPhoneNumber,
+  IsArray,
+  Min,
+  Length,
+  IsOptional,
+  IsBoolean,
+  IsNumber,
+  IsNumberString,
+} from 'class-validator'
+import { ApiProperty } from '@nestjs/swagger'
+import { PagingDto } from 'src/common/dto/index'
 
 export enum StatusEnum {
   STATIC = '0',
@@ -18,38 +30,38 @@ export class CreateRoleDto {
   @ApiProperty({ required: true })
   @IsString()
   @Length(0, 30)
-  roleName: string;
+  roleName: string
 
   @ApiProperty({ required: true })
   @IsString()
   @Length(0, 100)
-  roleKey: string;
+  roleKey: string
 
   @IsOptional()
   @IsArray()
-  menuIds?: Array<number>;
+  menuIds?: Array<number>
 
   @IsOptional()
   @IsArray()
-  deptIds?: Array<number>;
+  deptIds?: Array<number>
 
   @ApiProperty({ required: true })
   @IsOptional()
   @IsNumber()
-  roleSort?: number;
+  roleSort?: number
 
   @ApiProperty({ required: false })
   @IsOptional()
   @IsString()
   @IsEnum(StatusEnum)
-  status?: string;
+  status?: string
 
   @ApiProperty({
     required: false,
   })
   @IsOptional()
   @IsString()
-  dataScope: string;
+  dataScope: string
 
   @ApiProperty({
     required: false,
@@ -57,15 +69,15 @@ export class CreateRoleDto {
   @IsOptional()
   @IsString()
   @Length(0, 500)
-  remark?: string;
+  remark?: string
 
   @IsOptional()
   @IsBoolean()
-  menuCheckStrictly?: boolean;
+  menuCheckStrictly?: boolean
 
   @IsOptional()
   @IsBoolean()
-  deptCheckStrictly?: boolean;
+  deptCheckStrictly?: boolean
 }
 
 export class UpdateRoleDto extends CreateRoleDto {
@@ -73,7 +85,7 @@ export class UpdateRoleDto extends CreateRoleDto {
     required: true,
   })
   @IsNumber()
-  roleId: number;
+  roleId: number
 }
 
 export class ChangeStatusDto {
@@ -81,34 +93,34 @@ export class ChangeStatusDto {
     required: true,
   })
   @IsNumber()
-  roleId: number;
+  roleId: number
 
   @ApiProperty({ required: true })
   @IsString()
   @IsEnum(StatusEnum)
-  status: string;
+  status: string
 }
 
 export class ListRoleDto extends PagingDto {
   @IsOptional()
   @IsString()
   @Length(0, 30)
-  roleName?: string;
+  roleName?: string
 
   @IsOptional()
   @IsString()
   @Length(0, 100)
-  roleKey?: string;
+  roleKey?: string
 
   @IsOptional()
   @IsString()
   @IsEnum(StatusEnum)
-  status?: string;
+  status?: string
 
   @IsOptional()
   @IsString()
   @Length(0, 100)
-  roleId?: string;
+  roleId?: string
 }
 
 export class AuthUserCancelDto {
@@ -116,13 +128,13 @@ export class AuthUserCancelDto {
     required: true,
   })
   @IsNumber()
-  roleId: number;
+  roleId: number
 
   @ApiProperty({
     required: true,
   })
   @IsNumber()
-  userId: number;
+  userId: number
 }
 
 export class AuthUserCancelAllDto {
@@ -130,13 +142,13 @@ export class AuthUserCancelAllDto {
     required: true,
   })
   @IsNumber()
-  roleId: number;
+  roleId: number
 
   @ApiProperty({
     required: true,
   })
   @IsString()
-  userIds: string;
+  userIds: string
 }
 
 export class AuthUserSelectAllDto {
@@ -144,11 +156,11 @@ export class AuthUserSelectAllDto {
     required: true,
   })
   @IsNumber()
-  roleId: number;
+  roleId: number
 
   @ApiProperty({
     required: true,
   })
   @IsString()
-  userIds: string;
+  userIds: string
 }

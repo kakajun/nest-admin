@@ -1,6 +1,6 @@
-import * as Lodash from 'lodash';
+import * as Lodash from 'lodash'
 export const moduleTem = (options) => {
-  const { BusinessName, businessName } = options;
+  const { BusinessName, businessName } = options
 
   return `
 import { Module } from '@nestjs/common';
@@ -15,5 +15,5 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   providers: [${Lodash.upperFirst(BusinessName)}Service],
 })
 export class ${Lodash.upperFirst(BusinessName)}Module {}
-    `;
-};
+    `
+}

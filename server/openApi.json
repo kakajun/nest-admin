@@ -1,6 +1,22 @@
 {
   "openapi": "3.0.0",
   "paths": {
+    "/app/say-hello": {
+      "get": {
+        "operationId": "AppController_getHello",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
     "/system/user/profile": {
       "get": {
         "operationId": "UserController_profile",

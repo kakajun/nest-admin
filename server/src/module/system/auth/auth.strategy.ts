@@ -1,9 +1,9 @@
-import { PassportStrategy } from '@nestjs/passport';
-import { Strategy, ExtractJwt } from 'passport-jwt';
-import { ConfigService } from '@nestjs/config';
-import { UnauthorizedException, Injectable } from '@nestjs/common';
-import { RedisService } from 'src/module/redis/redis.service';
-import { CacheEnum } from 'src/common/enum/index';
+import { PassportStrategy } from '@nestjs/passport'
+import { Strategy, ExtractJwt } from 'passport-jwt'
+import { ConfigService } from '@nestjs/config'
+import { UnauthorizedException, Injectable } from '@nestjs/common'
+import { RedisService } from 'src/module/redis/redis.service'
+import { CacheEnum } from 'src/common/enum/index'
 
 @Injectable()
 export class AuthStrategy extends PassportStrategy(Strategy) {
@@ -18,7 +18,7 @@ export class AuthStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: config.get('jwt.secretkey'),
-    });
+    })
   }
 
   /**
@@ -28,9 +28,9 @@ export class AuthStrategy extends PassportStrategy(Strategy) {
    * 当用户存在时，会将 user 对象添加到 req 中，在之后的 req 对象中，可以使用 req.user 获取当前登录用户。
    */
   async validate(payload: { uuid: string; userId: string; iat: Date }) {
-    const user = await this.redisService.get(`${CacheEnum.LOGIN_TOKEN_KEY}${payload.uuid}`);
+    const user = await this.redisService.get(`${CacheEnum.LOGIN_TOKEN_KEY}${payload.uuid}`)
     // 如果用用户信息，代表 token 没有过期，没有则 token 已失效
-    if (!user) throw new UnauthorizedException('登录已过期，请重新登录');
-    return user;
+    if (!user) throw new UnauthorizedException('登录已过期，请重新登录')
+    return user
   }
 }

@@ -30,8 +30,8 @@ db:
   mysql:
     host: '127.0.0.1'
     username: 'root'
-    password: ''
-    database: 'admin_db'
+    password: '123456'
+    database: 'ADMIN'
     port: 3306
     charset: 'utf8mb4'
     logger: 'file'
